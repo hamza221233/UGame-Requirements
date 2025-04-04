@@ -6,7 +6,21 @@
     <title>محلل متطلبات الألعاب المتقدم</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
+       .theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+    stroke: var(--text-color);
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(15deg);
+    stroke: var(--primary);
+}
+ 
+       
+       
+       :root {
             --primary: #6c5ce7;
             --secondary: #a29bfe;
             --dark: #2d3436;
@@ -17,6 +31,26 @@
             --danger: #d63031;
             --card-bg: rgba(255, 255, 255, 0.05);
             --card-border: rgba(255, 255, 255, 0.1);
+            --text-color: #f5f6fa;
+            --bg-color: #2d3436;
+            --header-bg: linear-gradient(135deg, var(--dark), #34495e);
+        }
+
+        /* ألوان الوضع الفاتح */
+        [data-theme="light"] {
+            --primary: #6c5ce7;
+            --secondary: #7c6cf0;
+            --dark: #f5f6fa;
+            --light: #2d3436;
+            --accent: #e84393;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --card-bg: rgba(45, 52, 54, 0.05);
+            --card-border: rgba(45, 52, 54, 0.1);
+            --text-color: #2d3436;
+            --bg-color: #f5f6fa;
+            --header-bg: linear-gradient(135deg, #f5f6fa, #dfe6e9);
         }
 
         * {
@@ -24,11 +58,12 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Tajawal', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
-            background: linear-gradient(135deg, var(--dark), #34495e);
-            color: var(--light);
+            background: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -54,6 +89,30 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
+        /* زر تبديل الوضع */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+        }
+
         .controls {
             display: flex;
             justify-content: space-between;
@@ -76,7 +135,7 @@
             border-radius: 50px;
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            color: white;
+            color: var(--text-color);
             font-size: 1.1rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
@@ -93,13 +152,14 @@
             top: 100%;
             left: 0;
             width: 100%;
-            background: rgba(45, 52, 54, 0.95);
+            background: var(--dark);
             border-radius: 0 0 15px 15px;
             max-height: 300px;
             overflow-y: auto;
             z-index: 50;
             display: none;
             animation: slideDown 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .search-suggestions.active {
@@ -110,6 +170,7 @@
             padding: 0.8rem 1rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            color: var(--text-color);
         }
 
         .suggestion-item:hover {
@@ -144,7 +205,7 @@
             right: -350px;
             width: 350px;
             height: 100vh;
-            background: rgba(45, 52, 54, 0.95);
+            background: var(--dark);
             backdrop-filter: blur(10px);
             padding: 2rem;
             z-index: 100;
@@ -187,6 +248,7 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
             text-align: center;
+            color: var(--text-color);
         }
 
         .filter-option:hover, .filter-option.active {
@@ -210,7 +272,7 @@
             left: 1rem;
             background: none;
             border: none;
-            color: white;
+            color: var(--text-color);
             font-size: 1.5rem;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -331,7 +393,7 @@
         }
 
         .game-details-content {
-            background: rgba(45, 52, 54, 0.95);
+            background: var(--dark);
             border-radius: 15px;
             max-width: 800px;
             width: 100%;
@@ -357,7 +419,7 @@
             left: 1rem;
             background: none;
             border: none;
-            color: white;
+            color: var(--text-color);
             font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -465,7 +527,7 @@
             background: rgba(255,255,255,0.1);
             border: none;
             border-radius: 5px;
-            color: white;
+            color: var(--text-color);
             transition: all 0.3s ease;
             border: 1px solid transparent;
         }
@@ -485,7 +547,7 @@
             top: 100%;
             left: 0;
             width: 100%;
-            background: rgba(45, 52, 54, 0.95);
+            background: var(--dark);
             border-radius: 0 0 5px 5px;
             max-height: 200px;
             overflow-y: auto;
@@ -504,6 +566,7 @@
             padding: 0.8rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            color: var(--text-color);
         }
 
         .hardware-option:hover {
@@ -722,6 +785,13 @@
     </style>
 </head>
 <body>
+    <!-- زر تبديل الوضع -->
+    <button class="theme-toggle" id="theme-toggle">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z"/>
+        </svg>
+    </button>
+
     <div class="container">
         <header>
             <h1>محلل متطلبات الألعاب المتقدم</h1>
@@ -833,10 +903,10 @@
         </div>
 
         <div class="games-container" id="games-container">
-            <!-- سيتم إضافة الألعاب هنا عبر JavaScript -->
         </div>
-    </div>
-
+    <div class="pagination" id="pagination">
+        </div>
+</div>
     <!-- شاشة تفاصيل اللعبة -->
     <div class="game-details" id="game-details">
         <div class="game-details-content">
@@ -847,7 +917,8 @@
             <div class="requirements-section">
                 <h3 class="requirements-title">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
                     متطلبات التشغيل
                 </h3>
@@ -960,7 +1031,9 @@
     </div>
 
     <script>
-        // بيانات الألعاب (تمت إضافة المزيد من الألعاب)
+    
+       // بيانات الألعاب (100 لعبة)
+       
         const games = [
             {
                 id: 1,
@@ -3243,8 +3316,7 @@
   
 
 ];
-
-        // قوائم قطع الهاردوير للاقتراحات (تم توسيعها)
+        // قوائم قطع الهاردوير للاقتراحات
         const hardwareSuggestions = {
             cpu: [
                 "Intel Core i3-10100",
@@ -3290,7 +3362,7 @@
             ]
         };
 
-        // قاعدة بيانات أداء المعالجات والكروت (مبسطة)
+        // قاعدة بيانات أداء المعالجات والكروت
         const performanceDatabase = {
             cpus: {
                 "Intel Core i3-10100": 7500,
@@ -3308,17 +3380,7 @@
                 "AMD Ryzen 9 5900X": 24000,
                 "AMD Ryzen 5 7600X": 21000,
                 "AMD Ryzen 7 7700X": 25000,
-                "AMD Ryzen 9 7900X": 30000,
-                "Intel Core i5-2500K": 3500,
-                "AMD FX-8310": 3200,
-                "Intel Core i7-4790": 6500,
-                "AMD Ryzen 3 3200G": 5500,
-                "Intel Core i5-3570K": 4000,
-                "AMD FX-6300": 3000,
-                "Intel Core i5-8400": 8500,
-                "AMD Ryzen 3 3300X": 9000,
-                "Intel Core i7-8700K": 12000,
-                "AMD Ryzen 5 3600X": 12500
+                "AMD Ryzen 9 7900X": 30000
             },
             gpus: {
                 "NVIDIA GTX 1650": 3500,
@@ -3342,19 +3404,7 @@
                 "AMD RX 6800 XT": 15000,
                 "AMD RX 6900 XT": 17000,
                 "AMD RX 7900 XT": 19000,
-                "AMD RX 7900 XTX": 21000,
-                "NVIDIA GTX 780": 2500,
-                "AMD Radeon RX 470": 3000,
-                "NVIDIA GTX 1060": 4500,
-                "AMD Radeon R9 Fury": 4000,
-                "NVIDIA GTX 770": 2000,
-                "AMD Radeon R9 280": 2200,
-                "NVIDIA GTX 660": 1500,
-                "AMD Radeon HD 7870": 1400,
-                "NVIDIA GTX 1060 3GB": 4000,
-                "AMD RX 580": 4500,
-                "NVIDIA GTX 1070": 5500,
-                "AMD RX Vega 56": 6000
+                "AMD RX 7900 XTX": 21000
             }
         };
 
@@ -3380,6 +3430,25 @@
         const gamesPerPage = 10;
         let isLoading = false;
 
+        // تبديل الوضع الفاتح/الداكن
+        function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.getAttribute('data-theme');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (currentTheme === 'light') {
+        body.setAttribute('data-theme', 'dark');
+        // استبدل هذا السطر بأيقونة القمر الجديدة:
+        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.setAttribute('data-theme', 'light');
+        // استبدل هذا السطر بأيقونة الشمس الجديدة:
+        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
         // عرض الألعاب مع التحميل المتدرج
         function displayGames(gamesToDisplay = games, reset = false) {
             if (reset) {
@@ -3393,7 +3462,6 @@
             const endIndex = startIndex + gamesPerPage;
             const gamesToShow = gamesToDisplay.slice(0, endIndex);
             
-            // عرض هيكل التحميل المؤقت
             if (gamesToShow.length < gamesToDisplay.length && !isLoading) {
                 document.getElementById('loading-skeleton').style.display = 'grid';
                 document.getElementById('progress-bar').style.display = 'block';
@@ -3403,12 +3471,10 @@
                 document.getElementById('progress-bar').style.display = 'none';
             }
             
-            // إضافة الألعاب الجديدة فقط
             const currentCount = container.children.length;
             for (let i = currentCount; i < gamesToShow.length; i++) {
                 const game = gamesToShow[i];
                 
-                // التحقق من توافق اللعبة مع نظام المستخدم إذا كان مطلوباً
                 let isCompatible = true;
                 let isFullyCompatible = true;
                 
@@ -3420,7 +3486,6 @@
                     isFullyCompatible = userSystem.ram >= recRam;
                 }
                 
-                // تطبيق فلاتر التوافق
                 if (activeFilters.compatible === "full" && !isFullyCompatible) continue;
                 if (activeFilters.compatible === "partial" && (!isCompatible || isFullyCompatible)) continue;
                 
@@ -3509,32 +3574,25 @@
         function showGameDetails(game) {
             currentGameDetails = game;
             
-            // تعبئة البيانات
             document.getElementById('detail-game-image').src = game.image;
             document.getElementById('detail-game-image').alt = game.title;
             document.getElementById('detail-game-title').textContent = game.title;
             
-            // المتطلبات الدنيا
             document.getElementById('min-cpu').textContent = game.requirements.minimum.cpu;
             document.getElementById('min-gpu').textContent = game.requirements.minimum.gpu;
             document.getElementById('min-ram').textContent = game.requirements.minimum.ram;
             document.getElementById('min-storage').textContent = game.requirements.minimum.storage;
             document.getElementById('min-os').textContent = game.requirements.minimum.os;
             
-            // المتطلبات الموصى بها
             document.getElementById('rec-cpu').textContent = game.requirements.recommended.cpu;
             document.getElementById('rec-gpu').textContent = game.requirements.recommended.gpu;
             document.getElementById('rec-ram').textContent = game.requirements.recommended.ram;
             document.getElementById('rec-storage').textContent = game.requirements.recommended.storage;
             document.getElementById('rec-os').textContent = game.requirements.recommended.os;
             
-            // إظهار الشاشة
             document.getElementById('game-details').classList.add('active');
-            
-            // إخفاء نتائج التحليل السابقة
             document.getElementById('compatibility-results').classList.remove('active');
             
-            // تعبئة بيانات المستخدم إذا كانت موجودة
             if (userSystem.cpu) {
                 document.getElementById('user-cpu').value = userSystem.cpu;
             }
@@ -3551,25 +3609,21 @@
             document.getElementById('game-details').classList.remove('active');
         }
 
-        // تحليل توافق النظام (محسن)
+        // تحليل توافق النظام
         function checkCompatibility() {
             if (!currentGameDetails) return;
             
-            // الحصول على مواصفات المستخدم
             userSystem.cpu = document.getElementById('user-cpu').value.trim();
             userSystem.gpu = document.getElementById('user-gpu').value.trim();
             userSystem.ram = parseInt(document.getElementById('user-ram').value);
             
-            // تحليل التوافق مع خوارزمية محسنة
             const minRam = parseInt(currentGameDetails.requirements.minimum.ram);
             const recRam = parseInt(currentGameDetails.requirements.recommended.ram);
             
-            // تحليل المعالج
             const userCpuPerf = performanceDatabase.cpus[userSystem.cpu] || 0;
             const minCpuText = currentGameDetails.requirements.minimum.cpu;
             const recCpuText = currentGameDetails.requirements.recommended.cpu;
             
-            // استخراج أقوى معالج من المتطلبات
             const minCpuKey = Object.keys(performanceDatabase.cpus).find(cpu => 
                 minCpuText.includes(cpu)
             );
@@ -3581,12 +3635,10 @@
             const minCpuPerf = minCpuKey ? performanceDatabase.cpus[minCpuKey] : 0;
             const recCpuPerf = recCpuKey ? performanceDatabase.cpus[recCpuKey] : 0;
             
-            // تحليل كرت الشاشة
             const userGpuPerf = performanceDatabase.gpus[userSystem.gpu] || 0;
             const minGpuText = currentGameDetails.requirements.minimum.gpu;
             const recGpuText = currentGameDetails.requirements.recommended.gpu;
             
-            // استخراج أقوى كرت شاشة من المتطلبات
             const minGpuKey = Object.keys(performanceDatabase.gpus).find(gpu => 
                 minGpuText.includes(gpu)
             );
@@ -3598,12 +3650,10 @@
             const minGpuPerf = minGpuKey ? performanceDatabase.gpus[minGpuKey] : 0;
             const recGpuPerf = recGpuKey ? performanceDatabase.gpus[recGpuKey] : 0;
             
-            // حساب نسبة التوافق
             const cpuCompatibility = userCpuPerf / recCpuPerf;
             const gpuCompatibility = userGpuPerf / recGpuPerf;
             const ramCompatibility = userSystem.ram / recRam;
             
-            // تحديد حالة التوافق لكل مكون
             const getCompatibilityStatus = (compatibility) => {
                 if (compatibility >= 1) return "compatible";
                 if (compatibility >= 0.7) return "partially-compatible";
@@ -3623,7 +3673,6 @@
                 return `جهازك لا يتوافق مع المتطلبات الدنيا (${Math.round(compatibility * 100)}%)`;
             };
             
-            // إعداد نتائج التحليل
             const results = [
                 {
                     title: "المعالج",
@@ -3645,11 +3694,9 @@
                 }
             ];
             
-            // حساب التوافق العام
             const overallCompatibility = (cpuCompatibility * 0.4 + gpuCompatibility * 0.4 + ramCompatibility * 0.2);
             const overallStatus = getCompatibilityStatus(overallCompatibility);
             
-            // عرض النتائج
             const resultsContainer = document.getElementById('compatibility-results');
             resultsContainer.innerHTML = `
                 <h3>
@@ -3688,8 +3735,6 @@
             });
             
             resultsContainer.classList.add('active');
-            
-            // إعادة عرض الألعاب لتحديث حالة التوافق
             filterGames();
         }
 
@@ -3703,12 +3748,10 @@
                 return;
             }
             
-            // البحث في الألعاب
             const gameResults = games.filter(game => 
                 game.title.toLowerCase().includes(query.toLowerCase())
             ).slice(0, 3);
             
-            // البحث في قطع الهاردوير
             const hardwareResults = [
                 ...hardwareSuggestions.cpu.filter(item => 
                     item.toLowerCase().includes(query.toLowerCase())
@@ -3832,107 +3875,112 @@
             return filteredGames;
         }
 
-        // البحث عن الألعاب
-        document.getElementById('search').addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            showSearchSuggestions(query);
-        });
+        // تهيئة الوضع المظلم/الفاتح
+        function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    const themeIcon = document.getElementById('theme-icon');
+    if (savedTheme === 'light') {
+        // استبدل هذا السطر بأيقونة الشمس الجديدة:
+        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+    } else {
+        // استبدل هذا السطر بأيقونة القمر الجديدة:
+        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    }
+}
 
-        // إغلاق اقتراحات البحث عند النقر خارجها
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) {
-                document.getElementById('search-suggestions').classList.remove('active');
-            }
-        });
-
-        // إدارة قائمة التصفية
-        document.getElementById('filter-menu-btn').addEventListener('click', () => {
-            document.getElementById('filter-menu').classList.add('active');
-        });
-
-        document.getElementById('close-filter-menu').addEventListener('click', () => {
-            document.getElementById('filter-menu').classList.remove('active');
-        });
-
-        // تطبيق التصفية
-        document.querySelectorAll('.filter-option').forEach(option => {
-            option.addEventListener('click', (e) => {
-                const filterType = option.dataset.filter;
-                const filterValue = option.dataset.value;
-                
-                // تجاهل النقر على عناصر الـ checkbox مباشرة
-                if (e.target.tagName === 'INPUT') return;
-                
-                // إذا كانت فلترة متعددة الخيارات (checkbox)
-                if (option.classList.contains('multi-select')) {
-                    const checkbox = option.querySelector('input');
-                    checkbox.checked = !checkbox.checked;
-                    
-                    // تحديث الفلاتر النشطة
-                    if (filterType === 'compatible') {
-                        const fullChecked = document.querySelector('[data-value="full"] input').checked;
-                        const partialChecked = document.querySelector('[data-value="partial"] input').checked;
-                        
-                        if (!fullChecked && !partialChecked) {
-                            document.querySelector('[data-value="all"] input').checked = true;
-                            activeFilters.compatible = "all";
-                        } else {
-                            document.querySelector('[data-value="all"] input').checked = false;
-                            activeFilters.compatible = "";
-                            if (fullChecked) activeFilters.compatible += "full,";
-                            if (partialChecked) activeFilters.compatible += "partial";
-                        }
-                    }
-                } 
-                // إذا كانت فلترة عادية (radio)
-                else {
-                    // إزالة التنشيط من جميع خيارات هذا النوع
-                    document.querySelectorAll(`.filter-option[data-filter="${filterType}"]`).forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-                    
-                    // تنشيط الخيار المحدد
-                    option.classList.add('active');
-                    
-                    // تحديث الفلتر النشط
-                    activeFilters[filterType] = filterValue;
-                }
-                
-                // تطبيق التصفية
-                filterGames();
-            });
-        });
-
-        // إغلاق تفاصيل اللعبة
-        document.getElementById('close-details').addEventListener('click', closeGameDetails);
-
-        // تحقق من التوافق
-        document.getElementById('check-btn').addEventListener('click', checkCompatibility);
-
-        // اقتراحات الهاردوير عند الكتابة
-        document.getElementById('user-cpu').addEventListener('input', (e) => {
-            showHardwareSuggestions('cpu', e.target.value);
-        });
-
-        document.getElementById('user-gpu').addEventListener('input', (e) => {
-            showHardwareSuggestions('gpu', e.target.value);
-        });
-
-        // إغلاق اقتراحات الهاردوير عند النقر خارجها
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.hardware-suggestions')) {
-                document.getElementById('cpu-suggestions').classList.remove('active');
-                document.getElementById('gpu-suggestions').classList.remove('active');
-            }
-        });
-
-        // التحميل المتدرج عند التمرير
-        window.addEventListener('scroll', handleScroll);
-
-        // عرض الألعاب عند تحميل الصفحة
-        window.addEventListener('DOMContentLoaded', () => {
+        // تهيئة الصفحة
+        function init() {
+            initTheme();
             displayGames(games);
-        });
+            
+            // إضافة الأحداث
+            document.getElementById('search').addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                showSearchSuggestions(query);
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    document.getElementById('search-suggestions').classList.remove('active');
+                }
+            });
+            
+            document.getElementById('filter-menu-btn').addEventListener('click', () => {
+                document.getElementById('filter-menu').classList.add('active');
+            });
+            
+            document.getElementById('close-filter-menu').addEventListener('click', () => {
+                document.getElementById('filter-menu').classList.remove('active');
+            });
+            
+            document.querySelectorAll('.filter-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const filterType = option.dataset.filter;
+                    const filterValue = option.dataset.value;
+                    
+                    if (e.target.tagName === 'INPUT') return;
+                    
+                    if (option.classList.contains('multi-select')) {
+                        const checkbox = option.querySelector('input');
+                        checkbox.checked = !checkbox.checked;
+                        
+                        if (filterType === 'compatible') {
+                            const fullChecked = document.querySelector('[data-value="full"] input').checked;
+                            const partialChecked = document.querySelector('[data-value="partial"] input').checked;
+                            
+                            if (!fullChecked && !partialChecked) {
+                                document.querySelector('[data-value="all"] input').checked = true;
+                                activeFilters.compatible = "all";
+                            } else {
+                                document.querySelector('[data-value="all"] input').checked = false;
+                                activeFilters.compatible = "";
+                                if (fullChecked) activeFilters.compatible += "full,";
+                                if (partialChecked) activeFilters.compatible += "partial";
+                            }
+                        }
+                    } else {
+                        document.querySelectorAll(`.filter-option[data-filter="${filterType}"]`).forEach(opt => {
+                            opt.classList.remove('active');
+                        });
+                        
+                        option.classList.add('active');
+                        activeFilters[filterType] = filterValue;
+                    }
+                    
+                    filterGames();
+                });
+            });
+            
+            document.getElementById('close-details').addEventListener('click', closeGameDetails);
+            document.getElementById('check-btn').addEventListener('click', checkCompatibility);
+            
+            document.getElementById('user-cpu').addEventListener('input', (e) => {
+                showHardwareSuggestions('cpu', e.target.value);
+            });
+            
+            document.getElementById('user-gpu').addEventListener('input', (e) => {
+                showHardwareSuggestions('gpu', e.target.value);
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.hardware-suggestions')) {
+                    document.getElementById('cpu-suggestions').classList.remove('active');
+                    document.getElementById('gpu-suggestions').classList.remove('active');
+                }
+            });
+            
+            window.addEventListener('scroll', handleScroll);
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        }
+
+        // تشغيل التطبيق عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', init);
+    
+    
+    
+    
     </script>
 </body>
 </html>
